@@ -1,0 +1,8 @@
+<mat-form-field>
+  <input type="text" placeholder="Search Location" matInput [matAutocomplete]="auto" #searchInput>
+     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event)">
+       <mat-option *ngFor="let option of options" [value]="option">
+         {{ option.LocalizedName }}
+      </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,18 @@
+
+.card {
+  cursor: pointer;
+
+  .remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:25px;
+    height: 25px;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    background: rgb(240,0,17);
+    background: linear-gradient(45deg, rgba(240,0,17,1) 0%, rgba(255,0,0,0) 100%);
+  }
+}
+
+

@@ -1,0 +1,28 @@
+<app-search *ngIf="!error"></app-search>
+
+<h1 class="error" *ngIf="error">{{ error }}</h1>
+
+<h1 *ngIf="currentLocation && forecast">
+  <img [src]="'assets/weather-icons/' + forecast.currentCondition.WeatherIcon + '.png'">
+  {{ currentLocation.name }} 
+  {{ forecast.currentCondition.Temperature[unit].Value }}{{ forecast.currentCondition.Temperature[unit].Unit }} 
+  ({{ forecast.currentCondition.WeatherText }})
+  <button class="btn btn-success" (click)="onAddToFavorites()" *ngIf="favorites.indexOf(currentLocation.key) === -1">
+    <i class="fa fa-star"></i> Add To Favorites
+  </button>
+  <button class="btn btn-danger" (click)="onRemoveFromFavorites()" *ngIf="favorites.indexOf(currentLocation.key) !== -1">
+    <i class="fa fa-remove"></i> Remove From Favorites
+  </button>
+</h1>
+<p *ngIf="forecast">*{{ forecast.forecasts.Headline.Text }}</p>
+<div class="list" *ngIf="forecast">
+  <div class="card" *ngFor="let forecast of forecast.forecasts.DailyForecasts" [@list]>
+    <h2>{{ forecast.Date | date:'EEEE'}}</h2>
+    <h5>Day:</h5> <img [src]="'assets/weather-icons/' + forecast.Day.Icon + '.png'">
+    <h5>Night:</h5> <img [src]="'assets/weather-icons/' + forecast.Night.Icon + '.png'">
+    <h5>
+      Temperature:<br/>
+      {{ forecast.Temperature.Minimum.Value | number : '1.0-0' }}{{ forecast.Temperature.Minimum.Unit}} - {{ forecast.Temperature.Maximum.Value | number : '1.0-0' }}{{ forecast.Temperature.Maximum.Unit}}
+    </h5>
+  </div> 
+</div>
