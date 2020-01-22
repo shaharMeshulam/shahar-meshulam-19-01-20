@@ -10,7 +10,6 @@ import { Weather } from './weather.model';
 
 import * as fromApp from '../../store/app.reducer';
 import * as FavoritesActions from '../favorites/store/favorites.actions';
-import { Favorite } from '../favorites/favorite.model';
 
 @Component({
   selector: 'app-weather',
