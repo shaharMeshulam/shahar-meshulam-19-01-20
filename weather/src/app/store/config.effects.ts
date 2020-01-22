@@ -17,9 +17,6 @@ export class ConfigEffects {
     this.actions$.pipe(
       ofType(ConfigActions.toggleCelsius),
       withLatestFrom(this.store.select(fromApp.getIsCelsius)),
-      map(([action, IsCelsius]) => {
-        return IsCelsius;
-      }),
       withLatestFrom(this.store.select(fromApp.getForecasts)),
       map(([isCelsius, forecasts]) => {
         localStorage.setItem('isCelsius', isCelsius.toString());
