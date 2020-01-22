@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ThemeService } from './theme.service';
 import { ThemeDirective } from './theme.directive';
-import { THEMES, ACTIVE_THEME, ThemeOptions } from './symbols';
+import { THEMES, ThemeOptions } from './symbols';
 
 @NgModule({
   imports: [CommonModule],
@@ -19,10 +19,6 @@ export class ThemeModule {
         {
           provide: THEMES,
           useValue: options.themes
-        },
-        {
-          provide: ACTIVE_THEME,
-          useValue: options.active
         }
       ]
     };

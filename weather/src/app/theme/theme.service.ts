@@ -1,16 +1,16 @@
-import { Injectable, Inject, EventEmitter, OnInit } from '@angular/core';
-import { THEMES, ACTIVE_THEME, Theme } from './symbols';
+import { Injectable, Inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { THEMES, Theme } from './symbols';
 
 import * as fromApp from '../store/app.reducer';
 import * as ConfigActions from '../store/config.actions';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ThemeService {
+  theme: string;
 
   constructor(
     @Inject(THEMES) public themes: Theme[],
-    @Inject(ACTIVE_THEME) public theme: string,
     private store: Store<fromApp.AppState>
   ) {
     const themeName = localStorage.getItem('theme') || 'light';
