@@ -56,22 +56,20 @@ export interface GeoPositionApiResponse {
   DataSets: string[];
 }
 
-export class CurrentCondition {
-  constructor(
-    public LocalObservationDateTime: string,
-    public EpochTime: number,
-    public WeatherText: string,
-    public WeatherIcon: number,
-    public HasPrecipitation: boolean,
-    public PrecipitationType: string,
-    public IsDayTime: boolean,
-    public Temperature: {
-      Metric: UniteTypeAndValue;
-      Imperial: UniteTypeAndValue;
-    },
-    public MobileLink: string,
-    public Link: string
-  ) {}
+export interface CurrentCondition {
+  LocalObservationDateTime: string;
+  EpochTime: number;
+  WeatherText: string;
+  WeatherIcon: number;
+  HasPrecipitation: boolean;
+  PrecipitationType: string;
+  IsDayTime: boolean;
+  Temperature: {
+    Metric: UniteTypeAndValue;
+    Imperial: UniteTypeAndValue;
+  };
+  MobileLink: string;
+  Link: string;
 }
 
 
