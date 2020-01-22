@@ -38,7 +38,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       debounceTime(600),
       distinctUntilChanged(),
     ).subscribe(val => {
-      this.store.dispatch(SearchActions.getAutoComplete({ q: val }));
+      if (val.trim() !== '') {
+        this.store.dispatch(SearchActions.getAutoComplete({ q: val }));
+      }
     });
   }
 
