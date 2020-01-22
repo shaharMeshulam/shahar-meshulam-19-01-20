@@ -1,7 +1,5 @@
-import { Directive, OnInit, ElementRef } from '@angular/core';
+import { Directive, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Theme } from './symbols';
 
 import * as fromApp from '../store/app.reducer';
@@ -9,16 +7,16 @@ import * as fromApp from '../store/app.reducer';
 @Directive({
   selector: '[appTheme]'
 })
-export class ThemeDirective implements OnInit {
+export class ThemeDirective implements OnInit, OnDestroy {
 
-  private unsubscribe = new Subject();
+  private subscription: Subscription;
   constructor(
     private elementRef: ElementRef,
     private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
-    this.store.select(fromApp.getTheme).pipe(takeUntil(this.unsubscribe)).subscribe((theme) => {
+    this.subscription = this.store.select(fromApp.getTheme).subscribe((theme) => {
       if (theme) {
         this.updateTheme(theme);
       }
@@ -31,6 +29,10 @@ export class ThemeDirective implements OnInit {
         this.elementRef.nativeElement.style.setProperty(key, theme.properties[key]);
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
