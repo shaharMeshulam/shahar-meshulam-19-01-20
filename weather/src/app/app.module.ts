@@ -45,7 +45,6 @@ import { darkTheme } from './theme/dark-theme';
     StoreRouterConnectingModule.forRoot(),
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
-      active: 'light'
     })
   ],
   providers: [

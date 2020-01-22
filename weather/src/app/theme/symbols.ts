@@ -9,5 +9,4 @@ export interface Theme {
 
 export interface ThemeOptions {
   themes: Theme[];
-  active: string;
 }
