@@ -13,15 +13,13 @@ import { take } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
 
-  defaultTheme: string;
+  selectedTheme: string;
   isCelsius: boolean;
 
   constructor(private store: Store<fromApp.AppState>, private themeService: ThemeService) { }
 
   ngOnInit() {
-    this.store.select(fromApp.getTheme).pipe(
-      take(1)
-    ).subscribe(theme => this.defaultTheme = theme.name);
+    this.store.select(fromApp.getTheme).subscribe(theme => this.selectedTheme = theme.name);
 
     this.store.select(fromApp.getIsCelsius).pipe(
       take(1)
@@ -29,8 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onToggleTheme() {
-    const active = this.themeService.getActiveTheme() ;
-    if (active.name === 'light') {
+    if (this.selectedTheme === 'light') {
       this.themeService.setTheme('dark');
     } else {
       this.themeService.setTheme('light');

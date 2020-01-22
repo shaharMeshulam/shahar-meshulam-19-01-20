@@ -15,7 +15,7 @@ export class SearchEffects {
       switchMap(action => {
         let params = new HttpParams();
         params = params.append('q', action.q);
-        return this.http.get<AutoCompleteItem[]>('http://dataservice.accuweather.com/locations/v1/cities/autocomplete', { params });
+        return this.http.get<AutoCompleteItem[]>('https://dataservice.accuweather.com/locations/v1/cities/autocomplete', { params });
       }),
       map(resData => {
         return SearchActions.setAutoComplete({ options: resData });

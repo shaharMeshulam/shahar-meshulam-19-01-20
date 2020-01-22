@@ -72,7 +72,7 @@ export class FavoritesEffects {
         const geoLocations: GeoLocation[] = JSON.parse(localStorage.getItem('favorites')) || [];
         // Prepare array of http request from all favorites geoLocations
         const requests = geoLocations.map(geoLocation => {
-          return this.http.get<CurrentCondition>(`http://dataservice.accuweather.com/currentconditions/v1/${geoLocation.key}`);
+          return this.http.get<CurrentCondition>(`https://dataservice.accuweather.com/currentconditions/v1/${geoLocation.key}`);
         });
         // ForkJoin requests
         return forkJoin(requests);

@@ -24,7 +24,7 @@ export class WeatherEffects {
     this.actions$.pipe(
       ofType(WhetherActions.getLocationByKey),
       switchMap(action => {
-        return this.http.get<GeoPositionApiResponse>(`http://dataservice.accuweather.com/locations/v1/${action.key}`);
+        return this.http.get<GeoPositionApiResponse>(`https://dataservice.accuweather.com/locations/v1/${action.key}`);
       }),
       map(resData => {
         // Create new geoLocation with parameters from GeoPositionApiResponse
@@ -48,7 +48,7 @@ export class WeatherEffects {
         let params = new HttpParams();
         params = params.append('q', `${action.location.latitude}, ${action.location.longitude}`);
         return this.http.get<GeoPositionApiResponse>(
-          'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search',
+          'https://dataservice.accuweather.com/locations/v1/cities/geoposition/search',
           { params }
         );
       }),
@@ -73,8 +73,8 @@ export class WeatherEffects {
     this.actions$.pipe(
       ofType(WhetherActions.setLocation),
       switchMap(action => forkJoin([
-        this.http.get<ForecastApiResponse>(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${action.location.key}`),
-        this.http.get<CurrentCondition>(`http://dataservice.accuweather.com/currentconditions/v1/${action.location.key}`)
+        this.http.get<ForecastApiResponse>(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${action.location.key}`),
+        this.http.get<CurrentCondition>(`https://dataservice.accuweather.com/currentconditions/v1/${action.location.key}`)
       ])),
       withLatestFrom(this.store.select('config')),
       map(([resData, configState]) => {

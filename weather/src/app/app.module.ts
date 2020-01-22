@@ -28,8 +28,6 @@ import { ThemeModule } from './theme/theme.module';
 import { lightTheme } from './theme/light-theme';
 import { darkTheme } from './theme/dark-theme';
 
-const theme = localStorage.getItem('theme') || 'light';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +45,7 @@ const theme = localStorage.getItem('theme') || 'light';
     StoreRouterConnectingModule.forRoot(),
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
-      active: theme
+      active: 'light'
     })
   ],
   providers: [

@@ -13,7 +13,8 @@ export class ThemeService {
     @Inject(ACTIVE_THEME) public theme: string,
     private store: Store<fromApp.AppState>
   ) {
-    this.setTheme(this.getActiveTheme().name);
+    const themeName = localStorage.getItem('theme') || 'light';
+    this.setTheme(themeName);
   }
 
   getActiveTheme() {
