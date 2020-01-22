@@ -1,6 +1,6 @@
 import { Directive, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Theme } from './symbols';
+import { Theme } from './theme.model';
 import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';

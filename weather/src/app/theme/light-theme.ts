@@ -1,4 +1,4 @@
-import { Theme } from './symbols';
+import { Theme } from './theme.model';
 
 export const lightTheme: Theme = {
   name: 'light',

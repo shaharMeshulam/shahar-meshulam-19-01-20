@@ -76,9 +76,9 @@ export class WeatherEffects {
         this.http.get<ForecastApiResponse>(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${action.location.key}`),
         this.http.get<CurrentCondition>(`https://dataservice.accuweather.com/currentconditions/v1/${action.location.key}`)
       ])),
-      withLatestFrom(this.store.select('config')),
-      map(([resData, configState]) => {
-        if (configState.isCelsius) {
+      withLatestFrom(this.store.select(fromApp.getIsCelsius)),
+      map(([resData, IsCelsius]) => {
+        if (IsCelsius) {
           // Translate to celsius if config isCelsius is true
           resData[0].DailyForecasts = translateForecast('C', resData[0].DailyForecasts);
         }

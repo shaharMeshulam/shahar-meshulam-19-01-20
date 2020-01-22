@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
     if (isCelsius === 'true') {
       this.store.dispatch(ConfigActions.toggleCelsius());
     }
+
+    const themeName = localStorage.getItem('theme') || 'light';
+
+    this.store.dispatch(ConfigActions.changeTheme({ themeName }));
   }
 
   private success(position) {

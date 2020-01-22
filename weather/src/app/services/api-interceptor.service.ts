@@ -14,7 +14,7 @@ export class ApiInterceptorService implements HttpInterceptor {
   constructor(private store: Store<fromApp.AppState>, private flashMessage: FlashMessagesService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const modifiedRequest = req.clone({params: req.params.append('apikey', 'mLQxOBM0eKpDpXJabA50Xts1qnMUG4mG')});
+    const modifiedRequest = req.clone({params: req.params.append('apikey', '7Xf9S3cUSdFik9GwpWmosvuhAM6vK2GR')});
     return next.handle(modifiedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
         this.flashMessage.show(error.message, {cssClass: 'alert-danger', timeout: 4000});

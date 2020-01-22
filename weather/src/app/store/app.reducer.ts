@@ -33,6 +33,7 @@ const selectConfigState = createFeatureSelector('config');
 // Get the state slices as needed
 export const getIsCelsius = createSelector(selectConfigState, fromConfig.getIsCelsius);
 export const getError = createSelector(selectConfigState, fromConfig.getError);
+export const getThemes = createSelector(selectConfigState, fromConfig.getThemes);
 export const getTheme = createSelector(selectConfigState, fromConfig.getTheme);
 
 

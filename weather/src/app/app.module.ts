@@ -9,6 +9,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { ThemeModule } from './theme/theme.module';
 
 import { AppComponent } from './app.component';
 
@@ -24,9 +25,6 @@ import { ConfigEffects } from './store/config.effects';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 
 import * as fromApp from './store/app.reducer';
-import { ThemeModule } from './theme/theme.module';
-import { lightTheme } from './theme/light-theme';
-import { darkTheme } from './theme/dark-theme';
 
 @NgModule({
   declarations: [
@@ -38,14 +36,12 @@ import { darkTheme } from './theme/dark-theme';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ThemeModule,
     FlashMessagesModule.forRoot(),
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([WeatherEffects, SearchEffects, FavoritesEffects, ConfigEffects]),
     StoreDevtoolsModule.instrument({logOnly : environment.production}),
-    StoreRouterConnectingModule.forRoot(),
-    ThemeModule.forRoot({
-      themes: [lightTheme, darkTheme]
-    })
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     {

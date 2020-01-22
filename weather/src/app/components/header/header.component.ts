@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
 import * as ConfigActions from '../../store/config.actions';
-import { ThemeService } from 'src/app/theme/theme.service';
+
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(private store: Store<fromApp.AppState>, private themeService: ThemeService) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.subscription = this.store.select(fromApp.getTheme).subscribe(theme => this.selectedTheme = theme.name);
@@ -31,9 +31,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onToggleTheme() {
     if (this.selectedTheme === 'light') {
-      this.themeService.setTheme('dark');
+      this.store.dispatch(ConfigActions.changeTheme({ themeName: 'dark' }));
     } else {
-      this.themeService.setTheme('light');
+      this.store.dispatch(ConfigActions.changeTheme({ themeName: 'light' }));
     }
   }
 

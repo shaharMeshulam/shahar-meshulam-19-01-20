@@ -16,32 +16,38 @@ export class ConfigEffects {
   onToggleF2c$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ConfigActions.toggleCelsius),
-      withLatestFrom(this.store.select('config')),
-      map(([action, configState]) => {
-        return configState.isCelsius;
+      withLatestFrom(this.store.select(fromApp.getIsCelsius)),
+      map(([action, IsCelsius]) => {
+        return IsCelsius;
       }),
-      withLatestFrom(this.store.select('weather')),
-      map(([isCelsius, latestStoreData]) => {
+      withLatestFrom(this.store.select(fromApp.getForecasts)),
+      map(([isCelsius, forecasts]) => {
         localStorage.setItem('isCelsius', isCelsius.toString());
         // If there is no forecasts return nothing
-        if (!latestStoreData.weather) { return { type: 'DUMMY' }; }
+        if (!forecasts) { return { type: 'DUMMY' }; }
         if (!isCelsius) {
           // If user chose fahrenheit - translate forecasts to fahrenheit
-          latestStoreData.weather.forecasts.DailyForecasts = translateForecast('F', latestStoreData.weather.forecasts.DailyForecasts);
+          forecasts.forecasts.DailyForecasts = translateForecast('F', forecasts.forecasts.DailyForecasts);
         } else {
           // If user chose celsius - translate forecasts to celsius
-          latestStoreData.weather.forecasts.DailyForecasts = translateForecast('C', latestStoreData.weather.forecasts.DailyForecasts);
+          forecasts.forecasts.DailyForecasts = translateForecast('C', forecasts.forecasts.DailyForecasts);
         }
-        return WeatherActions.setForecast({ forecast: latestStoreData.weather });
+        return WeatherActions.setForecast({ forecast: forecasts });
       })
     )
   );
 
   onThemeChange$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ConfigActions.setTheme),
-      tap(action => localStorage.setItem('theme', action.theme.name ))
-    ), { dispatch: false}
+      ofType(ConfigActions.changeTheme),
+      map(action => action.themeName),
+      withLatestFrom(this.store.select(fromApp.getThemes)),
+      map(([themeName, themes]) => {
+        localStorage.setItem('theme', themeName);
+        const theme = themes.find(t => t.name === themeName);
+        return ConfigActions.setTheme({ theme });
+      })
+    )
   );
 
   constructor(
