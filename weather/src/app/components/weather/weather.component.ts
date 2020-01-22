@@ -57,15 +57,15 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   private weatherCurrentLocationSubscription: Subscription;
   private weatherForcastSubscription: Subscription;
-  private weatherErrorSubscription: Subscription;
+  private errorSubscription: Subscription;
   private favoritesSubscription: Subscription;
   private configSubscription: Subscription;
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    // Subscribe to weather error
-    this.weatherErrorSubscription = this.store.select(fromApp.getWeatherError).subscribe(error => this.error = error);
+    // Subscribe to any error
+    this.errorSubscription = this.store.select(fromApp.getError).subscribe(error => this.error = error);
 
     // Subscribe to weather currentLocation state changes
     this.weatherCurrentLocationSubscription = this.store.select(fromApp.getCurrentLocation).subscribe(currentLocation =>
@@ -73,7 +73,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
     );
 
     // Subscribe to weather forecasts state changes
-    this.weatherForcastSubscription = this.store.select(fromApp.getForecasts).subscribe(forecasts => forecasts);
+    this.weatherForcastSubscription = this.store.select(fromApp.getForecasts).subscribe(forecast => this.forecast = forecast);
 
     // Subscribe to favorites state changes
     this.favoritesSubscription = this.store.select('favorites').pipe(
@@ -101,7 +101,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.weatherErrorSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
     this.weatherCurrentLocationSubscription.unsubscribe();
     this.weatherForcastSubscription.unsubscribe();
     this.favoritesSubscription.unsubscribe();

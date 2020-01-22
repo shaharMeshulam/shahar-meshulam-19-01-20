@@ -7,13 +7,11 @@ import { Weather } from '../weather.model';
 export interface State {
   currentLocation: GeoLocation;
   weather: Weather;
-  error: string;
 }
 
 const initialState: State = {
   currentLocation: null,
   weather: null,
-  error: null
 };
 
 export function WeatherReducer(weatherState: State | undefined, weatherAction: Action) {
@@ -32,21 +30,6 @@ export function WeatherReducer(weatherState: State | undefined, weatherAction: A
         error: null,
         weather: action.forecast
       })
-    ),
-    on(WeatherActions.setCurrentCondition,
-      (state, action) => ({
-        ...state,
-        error: null,
-        currentCondition: action.currentCondition
-      })
-    ),
-    on(WeatherActions.setError,
-      (state, action) => ({
-        ...state,
-        currentLocation: null,
-        weather: null,
-        error: action.error
-      })
     )
   )(weatherState, weatherAction);
 }
@@ -59,8 +42,4 @@ export const getCurrentLocation = (state: State) => {
 
 export const getWeather = (state: State) => {
    return state.weather;
-};
-
-export const getError = (state: State) => {
-  return state.error;
 };

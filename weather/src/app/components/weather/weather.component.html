@@ -1,6 +1,6 @@
-<app-search *ngIf="!error"></app-search>
-
 <h1 class="error" *ngIf="error">{{ error }}</h1>
+
+<app-search *ngIf="!error"></app-search>
 
 <h1 *ngIf="currentLocation && forecast">
   <img [src]="'assets/weather-icons/' + forecast.currentCondition.WeatherIcon + '.png'">

@@ -33,10 +33,6 @@
     transition: .4s;
   }
   
-  input:checked + .slider {
-    background-color: #FF0070;
-  }
-  
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
@@ -54,5 +50,28 @@
   
   .slider.round:before {
     border-radius: 50%;
+  }
+}
+
+.navbar {
+  background: var(--header-background);
+  color: var(--text-color);
+
+  a {
+    color: inherit;
+  }
+
+  li {
+    color: inherit;
+
+    a {
+      color: inherit;
+    }
+
+    &.active {
+      a {
+        text-decoration: underline;
+      }
+    }
   }
 }

@@ -24,7 +24,11 @@ import { ConfigEffects } from './store/config.effects';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 
 import * as fromApp from './store/app.reducer';
+import { ThemeModule } from './theme/theme.module';
+import { lightTheme } from './theme/light-theme';
+import { darkTheme } from './theme/dark-theme';
 
+const theme = localStorage.getItem('theme') || 'light';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import * as fromApp from './store/app.reducer';
     EffectsModule.forRoot([WeatherEffects, SearchEffects, FavoritesEffects, ConfigEffects]),
     StoreDevtoolsModule.instrument({logOnly : environment.production}),
     StoreRouterConnectingModule.forRoot(),
+    ThemeModule.forRoot({
+      themes: [lightTheme, darkTheme],
+      active: theme
+    })
   ],
   providers: [
     {

@@ -28,12 +28,3 @@ export const setForecast = createAction(
   props<{ forecast: Weather}>()
 );
 
-export const setCurrentCondition = createAction(
-  '[Weather] Set Current Condition',
-  props<{ currentCondition: CurrentCondition }>()
-);
-
-export const setError = createAction(
-  '[Weather] Set Error',
-  props<{ error: string }>()
-);

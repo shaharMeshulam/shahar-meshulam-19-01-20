@@ -1,3 +1,7 @@
+p {
+  color: var(--text-color);
+}
+
 .card:first-child {
-  border: 5px solid green;
+  border: 5px solid var(--card-border);
 }

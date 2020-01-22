@@ -1,16 +1,23 @@
-<h1>Favorites:</h1>
+<h1 class="error" *ngIf="error">{{ error }}</h1>
 
-<div class="list">
-  <div class="card" *ngFor="let favorite of favorites; trackBy: trackByFn" [@list] (click)="onFavoriteSelected(favorite.geoLocation)">
-    <div class="remove" (click)="onRemove(favorite.geoLocation.key)">
-      <i class="fa fa-remove"></i>
+<div *ngIf="!error">
+  <h1>Favorites:</h1>
+  <h3 *ngIf="favorites.length === 0">No Favorites Added</h3>
+  <div class="list">
+    <div class="card" *ngFor="let favorite of favorites; trackBy: trackByFn" [@list]
+      (click)="onFavoriteSelected(favorite.geoLocation)">
+      <div class="remove" (click)="onRemove(favorite.geoLocation.key)">
+        <i class="fa fa-remove"></i>
+      </div>
+      <h2>{{ favorite.geoLocation.name }}</h2>
+      <div *ngIf="favorite.currentCondition">
+        <h5>
+          {{ favorite.currentCondition.Temperature[unit].Value }}{{ favorite.currentCondition.Temperature[unit].Unit }}
+        </h5>
+        <img [src]="'assets/weather-icons/' + favorite.currentCondition.WeatherIcon + '.png'">
+        <h5>{{ favorite.currentCondition.WeatherText }}</h5>
+      </div>
+      <app-loading-spinner *ngIf="!favorite.currentCondition"></app-loading-spinner>
     </div>
-    <h2>{{ favorite.geoLocation.name }}</h2>
-    <div *ngIf="favorite.currentCondition">
-      <h5>{{ favorite.currentCondition.Temperature[unit].Value }}{{ favorite.currentCondition.Temperature[unit].Unit }}</h5>
-      <img [src]="'assets/weather-icons/' + favorite.currentCondition.WeatherIcon + '.png'"> 
-      <h5>{{ favorite.currentCondition.WeatherText }}</h5>
-    </div>
-    <app-loading-spinner *ngIf="!favorite.currentCondition"></app-loading-spinner>
   </div>
 </div>

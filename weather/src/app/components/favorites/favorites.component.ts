@@ -55,9 +55,11 @@ import { Router } from '@angular/router';
 export class FavoritesComponent implements OnInit, OnDestroy {
   favorites: Favorite[];
   unit: string;
+  error: string;
 
   private favoritesSubscription: Subscription;
   private configSubscription: Subscription;
+  private errorSubscription: Subscription;
 
   constructor(private store: Store<fromApp.AppState>, private router: Router) { }
 
@@ -74,6 +76,9 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     this.configSubscription = this.store.select('config').subscribe(configState => {
       this.unit = configState.isCelsius ? 'Metric' : 'Imperial';
     });
+
+    // Subscribe to any error
+    this.errorSubscription = this.store.select(fromApp.getError).subscribe(error => this.error = error);
   }
 
   onRemove(key: string) {
@@ -92,5 +97,6 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.favoritesSubscription.unsubscribe();
     this.configSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 }

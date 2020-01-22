@@ -6,14 +6,14 @@ import * as fromApp from './app.reducer';
 import * as ConfigActions from './config.actions';
 import * as WeatherActions from '../components/weather/store/weather.actions';
 
-import { withLatestFrom, map } from 'rxjs/operators';
+import { withLatestFrom, map, tap } from 'rxjs/operators';
 
 import { translateForecast } from '../helpers/f2c';
 
 @Injectable()
 export class ConfigEffects {
 
-  onToggleF2c = createEffect(() =>
+  onToggleF2c$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ConfigActions.toggleCelsius),
       withLatestFrom(this.store.select('config')),
@@ -22,6 +22,7 @@ export class ConfigEffects {
       }),
       withLatestFrom(this.store.select('weather')),
       map(([isCelsius, latestStoreData]) => {
+        localStorage.setItem('isCelsius', isCelsius.toString());
         // If there is no forecasts return nothing
         if (!latestStoreData.weather) { return { type: 'DUMMY' }; }
         if (!isCelsius) {
@@ -36,8 +37,15 @@ export class ConfigEffects {
     )
   );
 
- constructor(
-   private actions$: Actions,
-   private store: Store<fromApp.AppState>
- ) { }
+  onThemeChange$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ConfigActions.setTheme),
+      tap(action => localStorage.setItem('theme', action.theme.name ))
+    ), { dispatch: false}
+  );
+
+  constructor(
+    private actions$: Actions,
+    private store: Store<fromApp.AppState>
+  ) { }
 }

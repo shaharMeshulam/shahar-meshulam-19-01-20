@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">Weather</a>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" routerLink="/">Weather</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,9 +8,19 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <div class="nav-link">
+          <span>Light Mode</span>
+          <label class="switch">
+            <input type="checkbox" (click)="onToggleTheme()" [checked]="defaultTheme === 'dark'">
+            <span class="slider round"></span>
+          </label>
+          <span>Dark Mode</span>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="nav-link">
           <span>Fahrenheit</span>
           <label class="switch">
-            <input type="checkbox" (click)="onToggleF2C()" >
+            <input type="checkbox" (click)="onToggleF2C()" [checked]="isCelsius">
             <span class="slider round"></span>
           </label>
           <span>Celsius</span>
