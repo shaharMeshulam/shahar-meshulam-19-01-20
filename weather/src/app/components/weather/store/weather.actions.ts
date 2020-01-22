@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
-import { ForecastApiResponse, AutoCompleteItem, CurrentCondition } from 'src/app/models/api.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 import { Weather } from '../weather.model';
 
 export const getLocationByKey = createAction(

@@ -7,7 +7,7 @@ import { tap, switchMap, map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 
 import { CurrentCondition } from 'src/app/models/api.model';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 import { Favorite } from '../favorite.model';
 
 import * as FavoritesActions from './favorites.actions';

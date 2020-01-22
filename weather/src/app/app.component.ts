@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { GeoLocation } from './shared/geoLocation.model';
+import { GeoLocation } from './models/geoLocation.model';
 
 import * as fromApp from './store/app.reducer';
 import * as WetherActions from './components/weather/store/weather.actions';

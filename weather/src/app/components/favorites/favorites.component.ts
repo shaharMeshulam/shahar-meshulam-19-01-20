@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { Favorite } from './favorite.model';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 
 import * as fromApp from '../../store/app.reducer';
 import * as FavoritesActions from './store/favorites.actions';

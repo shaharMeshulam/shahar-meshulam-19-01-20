@@ -7,7 +7,7 @@ import { switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 
 import { GeoPositionApiResponse, ForecastApiResponse, CurrentCondition } from 'src/app/models/api.model';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 import { Weather } from '../weather.model';
 
 import { translateForecast } from '../../../helpers/f2c';

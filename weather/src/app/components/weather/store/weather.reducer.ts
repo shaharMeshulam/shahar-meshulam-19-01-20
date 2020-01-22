@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 
 import * as WeatherActions from './weather.actions';
 import { Weather } from '../weather.model';

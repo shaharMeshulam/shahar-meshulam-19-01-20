@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 import { Weather } from './weather.model';
 
 import * as fromApp from '../../store/app.reducer';

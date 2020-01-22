@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { GeoLocation } from 'src/app/shared/geoLocation.model';
+import { GeoLocation } from 'src/app/models/geoLocation.model';
 import { Favorite } from '../favorite.model';
 
 export const getFavoritesFromLocalStorage = createAction(
