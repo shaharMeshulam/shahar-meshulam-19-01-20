@@ -7,7 +7,7 @@ import { Theme } from './symbols';
 import * as fromApp from '../store/app.reducer';
 
 @Directive({
-  selector: '[app-theme]'
+  selector: '[appTheme]'
 })
 export class ThemeDirective implements OnInit {
 
