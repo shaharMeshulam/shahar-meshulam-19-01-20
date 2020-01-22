@@ -58,7 +58,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   private weatherForcastSubscription: Subscription;
   private errorSubscription: Subscription;
   private favoritesSubscription: Subscription;
-  private configSubscription: Subscription;
+  private celsiusSubscription: Subscription;
 
   constructor(private store: Store<fromApp.AppState>) { }
 
@@ -86,7 +86,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to config state changes
-    this.configSubscription = this.store.select(fromApp.getIsCelsius).subscribe(isCelsius => {
+    this.celsiusSubscription = this.store.select(fromApp.getIsCelsius).subscribe(isCelsius => {
       this.unit = isCelsius ? 'Metric' : 'Imperial';
     });
   }
@@ -104,6 +104,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
     this.weatherCurrentLocationSubscription.unsubscribe();
     this.weatherForcastSubscription.unsubscribe();
     this.favoritesSubscription.unsubscribe();
-    this.configSubscription.unsubscribe();
+    this.celsiusSubscription.unsubscribe();
   }
 }
