@@ -6,7 +6,7 @@ import * as fromApp from './app.reducer';
 import * as ConfigActions from './config.actions';
 import * as WeatherActions from '../components/weather/store/weather.actions';
 
-import { withLatestFrom, map, tap } from 'rxjs/operators';
+import { withLatestFrom, map } from 'rxjs/operators';
 
 import { translateForecast } from '../helpers/f2c';
 
