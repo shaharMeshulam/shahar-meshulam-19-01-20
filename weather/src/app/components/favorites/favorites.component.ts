@@ -58,7 +58,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   error: string;
 
   private favoritesSubscription: Subscription;
-  private configSubscription: Subscription;
+  private celsiusSubscription: Subscription;
   private errorSubscription: Subscription;
 
   constructor(private store: Store<fromApp.AppState>, private router: Router) { }
@@ -73,8 +73,8 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to config state changes
-    this.configSubscription = this.store.select('config').subscribe(configState => {
-      this.unit = configState.isCelsius ? 'Metric' : 'Imperial';
+    this.celsiusSubscription = this.store.select(fromApp.getIsCelsius).subscribe(isCelsius => {
+      this.unit = isCelsius ? 'Metric' : 'Imperial';
     });
 
     // Subscribe to any error
@@ -96,7 +96,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.favoritesSubscription.unsubscribe();
-    this.configSubscription.unsubscribe();
+    this.celsiusSubscription.unsubscribe();
     this.errorSubscription.unsubscribe();
   }
 }

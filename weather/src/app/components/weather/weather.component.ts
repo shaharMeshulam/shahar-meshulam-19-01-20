@@ -87,8 +87,8 @@ export class WeatherComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to config state changes
-    this.configSubscription = this.store.select('config').subscribe(configState => {
-      this.unit = configState.isCelsius ? 'Metric' : 'Imperial';
+    this.configSubscription = this.store.select(fromApp.getIsCelsius).subscribe(isCelsius => {
+      this.unit = isCelsius ? 'Metric' : 'Imperial';
     });
   }
 
