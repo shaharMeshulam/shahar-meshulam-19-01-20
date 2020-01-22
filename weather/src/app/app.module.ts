@@ -44,7 +44,7 @@ import { darkTheme } from './theme/dark-theme';
     StoreDevtoolsModule.instrument({logOnly : environment.production}),
     StoreRouterConnectingModule.forRoot(),
     ThemeModule.forRoot({
-      themes: [lightTheme, darkTheme],
+      themes: [lightTheme, darkTheme]
     })
   ],
   providers: [
