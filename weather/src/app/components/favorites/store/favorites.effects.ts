@@ -32,9 +32,7 @@ export class FavoritesEffects {
       map(() => {
         const favorites = geoLocations2Favorites(null);
         return FavoritesActions.setFavorites({ favorites });
-      }),
-      // If request success reset error
-      tap(() => this.store.dispatch(ConfigActions.setError({ error: null })))
+      })
     )
   );
 
